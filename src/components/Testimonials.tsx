@@ -19,7 +19,7 @@ const Testimonials = () => {
       name: 'Sarah Johnson',
       location: 'New York, USA',
       rating: 5,
-      text: 'I've tried many hot sauces, but this shito is on another level! The depth of flavor is incredible, and it adds so much character to my meals. Truly authentic taste!',
+      text: "I've tried many hot sauces, but this shito is on another level! The depth of flavor is incredible, and it adds so much character to my meals. Truly authentic taste!",
       avatar: 'https://randomuser.me/api/portraits/women/45.jpg'
     },
     {
@@ -27,7 +27,7 @@ const Testimonials = () => {
       name: 'Michael Osei',
       location: 'London, UK',
       rating: 5,
-      text: 'As a Ghanaian living abroad, I've been searching for authentic shito for years. This brings me right back home with every bite. The quality and taste are outstanding!',
+      text: "As a Ghanaian living abroad, I've been searching for authentic shito for years. This brings me right back home with every bite. The quality and taste are outstanding!",
       avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
     },
     {
@@ -35,7 +35,7 @@ const Testimonials = () => {
       name: 'Emma Thompson',
       location: 'Toronto, Canada',
       rating: 4,
-      text: 'I discovered this sauce at a friend's dinner party and was immediately hooked. It has the perfect balance of heat and flavor that complements so many dishes.',
+      text: "I discovered this sauce at a friend's dinner party and was immediately hooked. It has the perfect balance of heat and flavor that complements so many dishes.",
       avatar: 'https://randomuser.me/api/portraits/women/65.jpg'
     }
   ];
