@@ -1,30 +1,52 @@
-
 import React, { useState } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, ShoppingCart } from 'lucide-react';
 import RotatingJar from './ui/RotatingJar';
 import AnimatedButton from './ui/AnimatedButton';
+import { useCart } from '@/context/CartContext';
 
 const ProductShowcase = () => {
   const [activeVariant, setActiveVariant] = useState(0);
+  const { addToCart } = useCart();
   
   const variants = [
     {
+      id: 'shito-original',
       name: 'Original',
       description: 'Our classic recipe with the perfect balance of heat and flavor.',
-      features: ['Medium spice level', 'Rich umami flavor', 'Versatile for any dish']
+      features: ['Medium spice level', 'Rich umami flavor', 'Versatile for any dish'],
+      price: 12.99,
+      image: '/lovable-uploads/2870634a-957d-480f-839f-ffb1ad68af56.png'
     },
     {
+      id: 'shito-extra-hot',
       name: 'Extra Hot',
       description: 'For those who love intense heat with complex flavors.',
-      features: ['High spice level', 'Bold smoky notes', 'Perfect for meat dishes']
+      features: ['High spice level', 'Bold smoky notes', 'Perfect for meat dishes'],
+      price: 13.99,
+      image: '/lovable-uploads/2870634a-957d-480f-839f-ffb1ad68af56.png'
     },
     {
+      id: 'shito-mild',
       name: 'Mild',
       description: 'All the authentic flavor with gentler heat.',
-      features: ['Low spice level', 'Sweet undertones', 'Great for seafood']
+      features: ['Low spice level', 'Sweet undertones', 'Great for seafood'],
+      price: 11.99,
+      image: '/lovable-uploads/2870634a-957d-480f-839f-ffb1ad68af56.png'
     }
   ];
-  
+
+  const handleAddToCart = () => {
+    const selectedVariant = variants[activeVariant];
+    addToCart({
+      id: selectedVariant.id,
+      name: 'Shito Sauce',
+      price: selectedVariant.price,
+      description: selectedVariant.description,
+      image: selectedVariant.image,
+      variant: selectedVariant.name
+    });
+  };
+
   return (
     <section id="products" className="section-padding bg-shito-beige/10 relative overflow-hidden">
       <div className="container-custom">
@@ -88,15 +110,17 @@ const ProductShowcase = () => {
               <div className="w-full h-px bg-gray-200 my-3" />
               <div className="flex items-baseline justify-between mb-2">
                 <span className="text-shito-black/60">Price</span>
-                <span className="text-2xl text-shito-red font-bold">$12.99</span>
+                <span className="text-2xl text-shito-red font-bold">
+                  ${variants[activeVariant].price}
+                </span>
               </div>
             </div>
             
             <AnimatedButton 
               variant="primary"
-              href="#shop"
               className="w-full"
-              icon={<ArrowRight size={18} />}
+              onClick={handleAddToCart}
+              icon={<ShoppingCart size={18} />}
             >
               Add to Cart
             </AnimatedButton>

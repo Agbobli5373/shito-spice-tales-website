@@ -1,13 +1,12 @@
-
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Menu, X, ShoppingCart } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import AnimatedButton from './ui/AnimatedButton';
+import { CartDrawer } from './CartDrawer';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // Handle scroll event to change navbar appearance
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -35,14 +34,12 @@ const Navbar = () => {
     >
       <div className="container-custom">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <a href="/" className="flex items-center">
             <span className={`text-2xl font-display font-bold ${isDarkMode() ? 'text-white' : 'text-shito-black'}`}>
               Shito<span className="text-shito-red">Tales</span>
             </span>
           </a>
           
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#about" className={`${isDarkMode() ? 'text-white' : 'text-shito-black'} hover:text-shito-red transition-colors font-medium`}>
               Our Story
@@ -58,11 +55,8 @@ const Navbar = () => {
             </a>
           </nav>
           
-          {/* CTA Button and Cart Icon */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className={`${isDarkMode() ? 'text-white' : 'text-shito-black'} hover:text-shito-red p-2`}>
-              <ShoppingCart size={24} />
-            </button>
+            <CartDrawer />
             <AnimatedButton 
               variant="primary"
               href="#shop"
@@ -72,7 +66,6 @@ const Navbar = () => {
             </AnimatedButton>
           </div>
           
-          {/* Mobile Menu Button */}
           <button 
             className={`md:hidden ${isDarkMode() ? 'text-white' : 'text-shito-black'} p-2`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -82,7 +75,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
       <div 
         className={`md:hidden absolute top-full left-0 right-0 ${isDarkMode() ? 'bg-shito-black' : 'bg-white'} shadow-md transition-transform duration-300 origin-top ${
           isMenuOpen ? 'transform scale-y-100' : 'transform scale-y-0'
@@ -121,9 +113,7 @@ const Navbar = () => {
           </nav>
           
           <div className="flex items-center justify-between pt-4">
-            <button className={`${isDarkMode() ? 'text-white' : 'text-shito-black'} hover:text-shito-red p-2`}>
-              <ShoppingCart size={24} />
-            </button>
+            <CartDrawer />
             <AnimatedButton 
               variant="primary"
               href="#shop"
