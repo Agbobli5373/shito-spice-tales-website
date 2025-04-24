@@ -1,10 +1,12 @@
 
-import React, { useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRight, Moon, Sun } from 'lucide-react';
 import AnimatedButton from './ui/AnimatedButton';
+import { Toggle } from './ui/toggle';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -32,15 +34,37 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark');
+  };
+  
   return (
     <div 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-white/5 to-shito-beige/10 overflow-hidden"
+      className={`relative min-h-screen flex items-center justify-center ${
+        isDarkMode ? 'bg-gradient-to-b from-shito-black/90 to-shito-black/80' : 'bg-gradient-to-b from-white/5 to-shito-beige/10'
+      } overflow-hidden`}
     >
+      {/* Theme toggle */}
+      <div className="absolute top-24 right-6 z-30">
+        <Toggle 
+          variant="outline" 
+          aria-label="Toggle theme" 
+          className={`rounded-full p-2 ${isDarkMode ? 'bg-shito-black/30 border-shito-red/30' : 'bg-white/30 border-shito-gold/30'}`}
+          pressed={isDarkMode}
+          onPressedChange={toggleTheme}
+        >
+          {isDarkMode ? <Moon className="h-5 w-5 text-shito-gold" /> : <Sun className="h-5 w-5 text-shito-red" />}
+        </Toggle>
+      </div>
+      
       {/* Subtle background pattern */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-kente-pattern opacity-5"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-transparent"></div>
+        <div className={`absolute inset-0 bg-kente-pattern opacity-5 ${isDarkMode ? 'invert' : ''}`}></div>
+        <div className={`absolute inset-0 bg-gradient-to-b ${
+          isDarkMode ? 'from-shito-black/80 via-shito-black/60 to-transparent' : 'from-white/80 via-white/60 to-transparent'
+        }`}></div>
       </div>
       
       {/* Floating ingredients */}
@@ -71,26 +95,27 @@ const Hero = () => {
       {/* Main hero content */}
       <div className="hero-content relative z-10 container mx-auto px-4 text-center py-20 mt-16">
         <div className="max-w-3xl mx-auto">
-          <h4 className="text-shito-red font-medium uppercase tracking-wider mb-4 animate-float-down">
+          <h4 className={`font-medium uppercase tracking-wider mb-4 animate-float-down ${isDarkMode ? 'text-shito-gold' : 'text-shito-red'}`}>
             Authentic Ghanaian
           </h4>
           
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold tracking-tight text-shito-black mb-6 animate-float-down" style={{ animationDelay: '0.2s' }}>
+          <h1 className={`text-4xl md:text-5xl lg:text-7xl font-display font-bold tracking-tight mb-6 animate-float-down ${isDarkMode ? 'text-white' : 'text-shito-black'}`} style={{ animationDelay: '0.2s' }}>
             Experience the Rich Flavor of{' '}
-            <span className="text-shito-red">Shito Sauce</span>
+            <span className="text-shito-red">Shito</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-shito-black/80 mb-10 max-w-2xl mx-auto animate-float-down" style={{ animationDelay: '0.4s' }}>
+          <p className={`text-lg md:text-xl mb-10 max-w-2xl mx-auto animate-float-down ${isDarkMode ? 'text-white/80' : 'text-shito-black/80'}`} style={{ animationDelay: '0.4s' }}>
             A centuries-old recipe crafted with the finest peppers, spices, and love.
             Elevate your dishes with our gourmet Ghanaian pepper sauce.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-float-down" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-float-down z-10 relative" style={{ animationDelay: '0.6s' }}>
             <AnimatedButton 
               variant="primary"
               href="#shop"
               size="lg"
               icon={<ArrowRight className="transition-transform group-hover:translate-x-1" />}
+              className={isDarkMode ? 'shadow-lg shadow-shito-red/20' : ''}
             >
               Shop Now
             </AnimatedButton>
@@ -99,6 +124,7 @@ const Hero = () => {
               variant="outline"
               href="#recipes"
               size="lg"
+              className={isDarkMode ? 'border-shito-gold text-shito-gold hover:bg-shito-gold/10' : ''}
             >
               Explore Recipes
             </AnimatedButton>
@@ -121,11 +147,10 @@ const Hero = () => {
         <svg 
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none" 
-          className="relative block w-full h-16 md:h-24"
+          className={`relative block w-full h-16 md:h-24 ${isDarkMode ? 'fill-shito-black' : 'fill-white'}`}
         >
           <path 
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C0,0,0,0,0,0" 
-            fill="#ffffff"
           />
         </svg>
       </div>

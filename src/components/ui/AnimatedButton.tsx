@@ -22,6 +22,8 @@ const AnimatedButton = ({
   onClick,
   icon
 }: AnimatedButtonProps) => {
+  const isDarkMode = () => document.documentElement.classList.contains('dark');
+  
   const getVariantClasses = () => {
     switch (variant) {
       case 'primary':
@@ -29,7 +31,9 @@ const AnimatedButton = ({
       case 'secondary':
         return 'bg-shito-gold hover:bg-shito-gold/90 text-shito-black relative overflow-hidden group';
       case 'outline':
-        return 'border-2 border-shito-red text-shito-red hover:bg-shito-red/10 relative overflow-hidden group';
+        return isDarkMode() 
+          ? 'border-2 border-shito-gold text-shito-gold hover:bg-shito-gold/10 relative overflow-hidden group' 
+          : 'border-2 border-shito-red text-shito-red hover:bg-shito-red/10 relative overflow-hidden group';
       default:
         return 'bg-shito-red hover:bg-shito-red/90 text-white relative overflow-hidden group';
     }
